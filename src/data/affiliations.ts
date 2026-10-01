@@ -35,4 +35,9 @@ export const affiliations: Affiliation[] = [
     sub: 'ESC',
     href: 'https://esc.umich.edu/faculty/',
   },
+  {
+    name: 'Center for History, Humanities, Arts, Social Sciences & Ethics in Medicine',
+    sub: 'CHHASSEM',
+    href: 'https://medresearch.umich.edu/labs-departments/centers/chhassem',
+  },
 ];

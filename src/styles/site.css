@@ -56,8 +56,8 @@ body {
   position: absolute;
   top: -6%; right: -12%;
   width: 70%; aspect-ratio: 1 / 1;
-  -webkit-mask: url(pattern-branches-mask.png) no-repeat top right / contain;
-          mask: url(pattern-branches-mask.png) no-repeat top right / contain;
+  -webkit-mask: url("/pattern-branches-mask.png") no-repeat top right / contain;
+          mask: url("/pattern-branches-mask.png") no-repeat top right / contain;
   background-color: var(--paper);
   opacity: 0.10;
   pointer-events: none;
@@ -192,8 +192,8 @@ body {
   position: absolute;
   top: -8%; right: -6%;
   width: 44%; aspect-ratio: 1 / 1;
-  -webkit-mask: url(pattern-branches-mask.png) no-repeat top right / contain;
-          mask: url(pattern-branches-mask.png) no-repeat top right / contain;
+  -webkit-mask: url("/pattern-branches-mask.png") no-repeat top right / contain;
+          mask: url("/pattern-branches-mask.png") no-repeat top right / contain;
   background-color: var(--paper);
   opacity: 0.16;
   pointer-events: none;
@@ -289,7 +289,7 @@ body {
   right: 10%;
   width: 126vh;
   height: 126vh;
-  background: url(branch-anchor.png) no-repeat center / contain;
+  background: url("/branch-anchor.png") no-repeat center / contain;
   opacity: 0.0382;
   pointer-events: none;
   z-index: 0;
@@ -352,7 +352,7 @@ body {
 .ll-contact__branch {
   position: absolute; bottom: -18%; left: -14%;
   width: 46%; aspect-ratio: 2367/2505;
-  background: url(branch-anchor.png) no-repeat bottom left / contain;
+  background: url("/branch-anchor.png") no-repeat bottom left / contain;
   opacity: 0.32; pointer-events: none;
   -webkit-mask: none; mask: none;
 }

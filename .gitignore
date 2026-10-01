@@ -5,3 +5,6 @@ dist/
 .env
 .env.production
 .env.local
+
+# Local planning notes (may contain private details; repo is public)
+notes/

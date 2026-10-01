@@ -3,7 +3,10 @@ import Base from '../layouts/Base.astro';
 import Sidebar from '../components/Sidebar.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import { affiliations } from '../data/affiliations';
-import { upcoming, recent } from '../data/events';
+import { events } from '../data/events';
+import { splitEvents, formatWhen } from '../lib/events';
+
+const { upcoming, recent } = splitEvents(events);
 ---
 <Base title="Tina Lasisi">
   <div class="ll-layout" data-screen-label="Home">
@@ -14,7 +17,7 @@ import { upcoming, recent } from '../data/events';
 
       <main class="tl-main">
 
-        <section class="tl-about">
+        <section class="tl-about" id="about">
           <p class="eyebrow">About</p>
           <p class="tl-about__body">
             I'm a biological anthropologist interested in the evolution and
@@ -36,7 +39,7 @@ import { upcoming, recent } from '../data/events';
           </section>
 
           <div class="tl-cta-row">
-            <a class="ll-btn ll-btn--primary" href="https://drive.google.com/file/d/14-MeUAdcJ8gipCyfVouDqzo90WixavXB/view?usp=sharing" target="_blank" rel="noopener">
+            <a class="ll-btn ll-btn--primary" href="/Lasisi_CV.pdf" target="_blank" rel="noopener">
               Download CV
             </a>
             <a class="ll-btn tl-btn-ghost" href="https://www.lasisilab.com" target="_blank" rel="noopener">
@@ -48,37 +51,45 @@ import { upcoming, recent } from '../data/events';
         <section class="tl-events" id="events" aria-label="Events">
           <p class="eyebrow">Events</p>
 
-          <p class="eyebrow tl-events__subhead">Upcoming</p>
-          <ul class="ll-postlist">
-            {upcoming.map((e) => (
-              <li class="ll-postlist__item">
-                <a class="ll-postlist__link" href={e.href} target="_blank" rel="noopener">
-                  <div class="ll-postlist__meta">
-                    <span class={`ll-tag ll-tag--${e.tagColor}`}>{e.tag}</span>
-                    <span class="ll-postlist__date" set:html={e.date}></span>
-                  </div>
-                  <h3 class="ll-postlist__title" set:html={e.title}></h3>
-                  <p class="ll-postlist__summary">{e.summary}</p>
-                </a>
-              </li>
-            ))}
-          </ul>
+          {upcoming.length > 0 && (
+            <>
+              <p class="eyebrow tl-events__subhead">Upcoming</p>
+              <ul class="ll-postlist">
+                {upcoming.map((e) => (
+                  <li class="ll-postlist__item">
+                    <a class="ll-postlist__link" href={e.href} target="_blank" rel="noopener">
+                      <div class="ll-postlist__meta">
+                        <span class={`ll-tag ll-tag--${e.tagColor}`}>{e.tag}</span>
+                        <span class="ll-postlist__date">{formatWhen(e)}</span>
+                      </div>
+                      <h3 class="ll-postlist__title" set:html={e.title}></h3>
+                      <p class="ll-postlist__summary">{e.summary}</p>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
 
-          <p class="eyebrow eyebrow--muted tl-events__subhead">Recent</p>
-          <ul class="ll-postlist ll-postlist--past">
-            {recent.map((e) => (
-              <li class="ll-postlist__item ll-postlist__item--past">
-                <a class="ll-postlist__link" href={e.href} target="_blank" rel="noopener">
-                  <div class="ll-postlist__meta">
-                    <span class={`ll-tag ll-tag--${e.tagColor}`}>{e.tag}</span>
-                    <span class="ll-postlist__date" set:html={e.date}></span>
-                  </div>
-                  <h3 class="ll-postlist__title" set:html={e.title}></h3>
-                  <p class="ll-postlist__summary">{e.summary}</p>
-                </a>
-              </li>
-            ))}
-          </ul>
+          {recent.length > 0 && (
+            <>
+              <p class="eyebrow eyebrow--muted tl-events__subhead">Recent</p>
+              <ul class="ll-postlist ll-postlist--past">
+                {recent.map((e) => (
+                  <li class="ll-postlist__item ll-postlist__item--past">
+                    <a class="ll-postlist__link" href={e.href} target="_blank" rel="noopener">
+                      <div class="ll-postlist__meta">
+                        <span class="ll-tag ll-tag--neutral">{e.tag}</span>
+                        <span class="ll-postlist__date">{formatWhen(e)}</span>
+                      </div>
+                      <h3 class="ll-postlist__title" set:html={e.title}></h3>
+                      <p class="ll-postlist__summary">{e.summary}</p>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </section>
 
         <section class="tl-contact" id="contact" aria-label="Contact">

@@ -1,5 +1,9 @@
 ---
-// Fixed-position sidebar: avatar, name, role, email, social icons.
+// Fixed-position sidebar: avatar, name, role, status, email, social icons.
+import { sabbatical } from '../data/status';
+import { todayISO } from '../lib/events';
+
+const showSabbatical = todayISO() <= sabbatical.until;
 ---
 <aside class="ll-sidebar">
   <div class="ll-sidebar__branch" aria-hidden="true"></div>
@@ -14,6 +18,13 @@
       <a href="https://lsa.umich.edu/anthro/people/faculty/biological-faculty/tlasisi.html" target="_blank" rel="noopener">Anthropology</a><br />
       <a href="https://lsa.umich.edu/eeb/people/faculty/tina-lasisi.html" target="_blank" rel="noopener">Ecology &amp; Evolutionary Biology</a>
     </p>
+
+    {showSabbatical && (
+      <p class="tl-sb-status">
+        <span class="tl-sb-status__label">{sabbatical.label}</span>
+        <span class="tl-sb-status__detail">{sabbatical.detail}</span>
+      </p>
+    )}
 
     <section class="tl-sb-affil" aria-label="Email">
       <p class="tl-sb-heading">Email</p>
