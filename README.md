@@ -12,7 +12,7 @@ astro-handoff/
 ├── tsconfig.json
 ├── .gitignore
 ├── public/                  ← static assets, served from /<filename>
-│   ├── headshot.jpg
+│   ├── headshot-2026.jpg   ← new filename forces browsers to refetch
 │   ├── branch-*.png
 │   ├── mark-*.png
 │   └── pattern-branches-mask.png

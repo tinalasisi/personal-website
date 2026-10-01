@@ -59,7 +59,7 @@ export const events: EventEntry[] = [
     end: '2026-08-22',
     where: 'Chicago, IL',
     title: 'Midwest Population Genetics Meeting',
-    summary: 'I was there judging the graduate student talks.',
+    summary: 'I was there with my postdoc, Yemko Pryor, who won Best Postdoc Poster.',
     href: 'https://jkreinz.github.io/mwpg2026/',
   },
   {
