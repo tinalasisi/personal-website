@@ -1,11 +1,17 @@
 ---
-// Top nav inside the right column.
+// Top nav inside the right column. Section links are root-relative so they
+// also work from other pages; `active` underlines the current page's link.
+export interface Props {
+  active?: 'media';
+}
+const { active } = Astro.props;
 ---
 <header class="ll-header">
   <nav class="ll-header__nav">
-    <a href="#about" class="ll-header__link">About</a>
-    <a href="#events" class="ll-header__link">Events</a>
-    <a href="#contact" class="ll-header__link">Contact</a>
+    <a href="/#about" class="ll-header__link">About</a>
+    <a href="/#events" class="ll-header__link">Events</a>
+    <a href="/media" class:list={['ll-header__link', { 'is-active': active === 'media' }]}>Media</a>
+    <a href="/#contact" class="ll-header__link">Contact</a>
     <button class="tl-theme-toggle" aria-label="Cycle theme" title="Cycle theme: system / light / dark" onclick="cycleTheme()">
       <svg class="icon-system" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
       <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>

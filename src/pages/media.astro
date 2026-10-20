@@ -1,0 +1,128 @@
+---
+import Base from '../layouts/Base.astro';
+import Sidebar from '../components/Sidebar.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { video, podcasts, press } from '../data/media';
+import { monthDay, monthYear } from '../lib/media';
+
+// Podcasts grouped by year, newest first.
+const byYear = new Map<string, typeof podcasts>();
+for (const p of [...podcasts].sort((a, b) => b.date.localeCompare(a.date))) {
+  const y = p.date.slice(0, 4);
+  byYear.set(y, [...(byYear.get(y) ?? []), p]);
+}
+
+// Press grouped by the paper it covers, in the order each story first appears.
+const byStory = new Map<string, typeof press>();
+for (const item of [...press].sort((a, b) => b.date.localeCompare(a.date))) {
+  byStory.set(item.story, [...(byStory.get(item.story) ?? []), item]);
+}
+---
+<Base title="Media · Tina Lasisi">
+  <div class="ll-layout" data-screen-label="Media">
+    <Sidebar />
+
+    <div class="ll-content">
+      <SiteHeader active="media" />
+
+      <main class="tl-main">
+
+        <section class="tl-media-intro" aria-label="Media">
+          <p class="eyebrow">Media</p>
+          <p class="tl-about__body">
+            TV, podcasts, and press on the science of human hair and skin.
+          </p>
+          <nav class="tl-media-jump" aria-label="Jump to">
+            <a href="#video">TV &amp; video <span>{video.length}</span></a>
+            <a href="#podcasts">Podcasts <span>{podcasts.length}</span></a>
+            <a href="#press">Press <span>{press.length}</span></a>
+          </nav>
+        </section>
+
+        <section class="tl-media-section" id="video" aria-label="TV and video">
+          <p class="eyebrow">TV &amp; video</p>
+          <ul class="ll-postlist">
+            {video.map((s) => (
+              <li class="ll-postlist__item">
+                <a class="ll-postlist__link" href={s.href} target="_blank" rel="noopener">
+                  <div class="ll-postlist__meta">
+                    <span class="ll-tag ll-tag--teal">{s.role}</span>
+                    <span class="ll-postlist__date">{s.network} · {s.years}</span>
+                  </div>
+                  <h3 class="ll-postlist__title">{s.title}</h3>
+                  <p class="ll-postlist__summary">{s.summary}</p>
+                </a>
+                {s.awards?.map((award) => (
+                  <p class="tl-award">
+                    <i class="fa-solid fa-award" aria-hidden="true"></i>
+                    <a href={award.href} target="_blank" rel="noopener">{award.label}</a>
+                  </p>
+                ))}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section class="tl-media-section" id="podcasts" aria-label="Podcasts">
+          <p class="eyebrow">Podcasts</p>
+          {[...byYear].map(([year, eps]) => (
+            <div class="tl-pod-year">
+              <h3 class="tl-pod-year__label">{year}</h3>
+              <ul class="tl-pod-list">
+                {eps.map((p) => (
+                  <li class="tl-pod">
+                    <p class="tl-pod__show">{p.show} <span>· {monthDay(p.date)}</span></p>
+                    <p class="tl-pod__title">{p.title}</p>
+                    <p class="tl-pod__links">
+                      {p.apple && (
+                        <a href={p.apple} target="_blank" rel="noopener">
+                          <i class="fa-solid fa-podcast" aria-hidden="true"></i>Apple
+                        </a>
+                      )}
+                      {p.spotify && (
+                        <a href={p.spotify} target="_blank" rel="noopener">
+                          <i class="fa-brands fa-spotify" aria-hidden="true"></i>Spotify
+                        </a>
+                      )}
+                      {p.web && (
+                        <a href={p.web} target="_blank" rel="noopener">
+                          <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>Episode page
+                        </a>
+                      )}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </section>
+
+        <section class="tl-media-section" id="press" aria-label="Press">
+          <p class="eyebrow">Press</p>
+          {[...byStory].map(([story, items]) => (
+            <div class="tl-press-story">
+              <p class="eyebrow eyebrow--muted tl-events__subhead">{story}</p>
+              <ul class="tl-press-list">
+                {items.map((item) => (
+                  <li>
+                    <a href={item.href} target="_blank" rel="noopener">
+                      <span class="tl-press__outlet">{item.outlet}</span>
+                      <span class="tl-press__headline">{item.headline}</span>
+                      <span class="tl-press__date">{monthYear(item.date)}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </section>
+
+      </main>
+
+      <footer class="ll-footer">
+        <img src="/mark-teal.png" alt="" class="tl-footer__mark" />
+        <p class="tl-footer__copy">© 2026 Lasisi Labs LLC</p>
+      </footer>
+    </div>
+  </div>
+</Base>

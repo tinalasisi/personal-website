@@ -5,8 +5,11 @@ import SiteHeader from '../components/SiteHeader.astro';
 import { affiliations } from '../data/affiliations';
 import { events } from '../data/events';
 import { splitEvents, formatWhen } from '../lib/events';
+import { video, podcasts, press } from '../data/media';
+import { mediaHighlights } from '../lib/media';
 
 const { upcoming, recent } = splitEvents(events);
+const highlights = mediaHighlights();
 ---
 <Base title="Tina Lasisi">
   <div class="ll-layout" data-screen-label="Home">
@@ -90,6 +93,27 @@ const { upcoming, recent } = splitEvents(events);
               </ul>
             </>
           )}
+        </section>
+
+        <section class="tl-media-section tl-media-strip" id="media" aria-label="Media">
+          <p class="eyebrow">Media</p>
+          <p class="tl-media-strip__lead">
+            {video.length} TV &amp; video projects, {podcasts.length} podcasts, and {press.length} press stories. A few highlights:
+          </p>
+          <ul class="tl-media-strip__list">
+            {highlights.map((h) => (
+              <li>
+                <a class="tl-media-card" href={h.href} target="_blank" rel="noopener">
+                  <span class={`ll-tag ll-tag--${h.tagColor}`}>{h.kind}</span>
+                  <span class="tl-media-card__source">{h.source} · {h.when}</span>
+                  <span class="tl-media-card__title">{h.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div class="tl-cta-row">
+            <a class="ll-btn tl-btn-ghost" href="/media">See all media →</a>
+          </div>
         </section>
 
         <section class="tl-contact" id="contact" aria-label="Contact">
