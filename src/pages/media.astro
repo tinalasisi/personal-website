@@ -40,7 +40,7 @@ for (const item of [...press].sort((a, b) => b.date.localeCompare(a.date))) {
         </section>
 
         <section class="tl-media-section" id="video" aria-label="TV and video">
-          <p class="eyebrow">TV &amp; video</p>
+          <h2 class="eyebrow">TV &amp; video</h2>
           <ul class="ll-postlist">
             {video.map((s) => (
               <li class="ll-postlist__item">
@@ -64,7 +64,7 @@ for (const item of [...press].sort((a, b) => b.date.localeCompare(a.date))) {
         </section>
 
         <section class="tl-media-section" id="podcasts" aria-label="Podcasts">
-          <p class="eyebrow">Podcasts</p>
+          <h2 class="eyebrow">Podcasts</h2>
           {[...byYear].map(([year, eps]) => (
             <div class="tl-pod-year">
               <h3 class="tl-pod-year__label">{year}</h3>
@@ -98,10 +98,10 @@ for (const item of [...press].sort((a, b) => b.date.localeCompare(a.date))) {
         </section>
 
         <section class="tl-media-section" id="press" aria-label="Press">
-          <p class="eyebrow">Press</p>
+          <h2 class="eyebrow">Press</h2>
           {[...byStory].map(([story, items]) => (
             <div class="tl-press-story">
-              <p class="eyebrow eyebrow--muted tl-events__subhead">{story}</p>
+              <h3 class="eyebrow eyebrow--muted tl-events__subhead">{story}</h3>
               <ul class="tl-press-list">
                 {items.map((item) => (
                   <li>

@@ -188,7 +188,6 @@ export const podcasts: Podcast[] = [
     date: '2022-02-23',
     apple: 'https://podcasts.apple.com/us/podcast/hair-variation-whats-her-story-with-dr-tina-lasisi/id1068563276?i=1000551957364',
     spotify: 'https://open.spotify.com/episode/0uLxaFfnAPO6z9MZpG2A4J',
-    web: 'https://jonathanvanness.com/podcast/getting-curious-hair-variation-whats-her-story-with-dr-tina-lasisi/',
   },
   {
     show: 'In Those Genes',
